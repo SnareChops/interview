@@ -1,0 +1,36 @@
+<html>
+  <head></head>
+  <body>
+    <script>
+      const $ul = document.createElement('ul')
+      const $ul2 = document.createElement('ul')
+
+      async function main() {
+        try{
+          await list1()
+        } catch(err) {}
+        await list2()
+      }
+
+      async function list1() {
+        const res = await fetch('http://localhost:8080/data')
+        const data = await res.json()
+        document.body.append(...data.map(li))
+      }
+
+      async function list2() {
+        const res = await fetch('http://localhost:8080/data/v2')
+        const data = await res.json()
+        document.body.append(...data.map(li))
+      }
+
+      function li(name){
+        const el = document.createElement('li')
+        el.innerText = name
+        return el
+      }
+
+      main()
+    </script>
+  </body>
+</html>
